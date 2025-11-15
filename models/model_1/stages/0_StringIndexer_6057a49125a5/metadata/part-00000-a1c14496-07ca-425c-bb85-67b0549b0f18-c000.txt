@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1763217287649,"sparkVersion":"4.0.1","uid":"StringIndexer_6057a49125a5","paramMap":{"inputCol":"Type","outputCol":"Type_index"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_6057a49125a5__output","stringOrderType":"frequencyDesc"}}
