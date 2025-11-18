@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.feature.StringIndexerModel","timestamp":1763500621560,"sparkVersion":"4.0.1","uid":"StringIndexer_67d8c8309aa6","paramMap":{"outputCol":"ShippingMonthName_index","inputCol":"ShippingMonthName"},"defaultParamMap":{"handleInvalid":"error","outputCol":"StringIndexer_67d8c8309aa6__output","stringOrderType":"frequencyDesc"}}
