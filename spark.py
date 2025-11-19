@@ -25,3 +25,14 @@ schema = StructType([
     StructField("OrderRegion", StringType()),
     StructField("ShippingMonthName", StringType()),
 ])
+
+json_df = stream_df.select(
+    from_json(col("value"), schema).alias("data")
+).select("data.*")
+
+query = json_df.writeStream \
+    .format("console") \
+    .outputMode("append") \
+    .start()
+
+query.awaitTermination()
