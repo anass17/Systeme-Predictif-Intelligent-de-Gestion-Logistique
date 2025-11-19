@@ -1,13 +1,27 @@
-import socket
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import from_json, col
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('127.0.0.1', 9999))
+spark = SparkSession.builder \
+    .appName("Gestion_logistique") \
+    .master("local[*]") \
+    .config("spark.sql.shuffle.partitions", "8") \
+    .config("spark.driver.memory", "4g") \
+    .config("spark.driver.maxResultSize", "1g") \
+    .getOrCreate()
 
-i = 0
+stream_df = spark.readStream \
+    .format("socket") \
+    .option("host", "127.0.0.1") \
+    .option("port", 9999) \
+    .load()
 
-while i < 10:
-    data = client_socket.recv(1024)
-    print(f"Serveur a envoyer : {data.decode()}")
-    i += 1
-
-client_socket.close()
+schema = StructType([
+    StructField("Type", StringType()),
+    StructField("ShippingMode", StringType()),
+    StructField("CategoryName", StringType()),
+    StructField("CustomerSegment", StringType()),
+    StructField("OrderItemTotal", FloatType()),
+    StructField("OrderRegion", StringType()),
+    StructField("ShippingMonthName", StringType()),
+])

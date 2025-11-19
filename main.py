@@ -19,7 +19,7 @@ def generate_data():
         "ShippingMode": random.choice(modes_list),
         "CategoryName": random.choice(categories_list),
         "CustomerSegment": random.choice(segments_list),
-        "OrderItemTotal": random.randint(0, 500),
+        "OrderItemTotal": round(random.uniform(0, 500), 2),
         "OrderRegion": random.choice(regions_list),
         "ShippingMonthName": random.choice(months_list),
     }
