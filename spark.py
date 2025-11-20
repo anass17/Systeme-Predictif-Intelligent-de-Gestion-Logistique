@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_json, col
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
+from pyspark.sql.functions import from_json, col, window, current_timestamp
+from pyspark.sql.types import StructType, StructField, StringType, FloatType
 
 spark = SparkSession.builder \
     .appName("Gestion_logistique") \
@@ -30,9 +30,16 @@ json_df = stream_df.select(
     from_json(col("value"), schema).alias("data")
 ).select("data.*")
 
-query = json_df.writeStream \
+df = json_df.withColumn("timestamp", current_timestamp())
+
+windowed_df = df.groupBy(
+    window(col("timestamp"), "20 seconds")
+).count()
+
+query = windowed_df.writeStream \
     .format("console") \
-    .outputMode("append") \
+    .outputMode("update") \
+    .option("truncate", False) \
     .start()
 
 query.awaitTermination()
