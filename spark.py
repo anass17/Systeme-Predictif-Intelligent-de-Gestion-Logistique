@@ -40,10 +40,21 @@ windowed_df = df_timestamp.groupBy(
 
 model = PipelineModel.load("models/gbt_cv_pipeline")
 
-query = windowed_df.writeStream \
+
+predictions = model.transform(df_timestamp)
+
+windowed_query = windowed_df.writeStream \
     .format("console") \
     .outputMode("update") \
     .option("truncate", False) \
     .start()
+
+query = predictions.select('Type', 'ShippingMode', 'prediction', 'probability').writeStream \
+    .format("console") \
+    .outputMode("append") \
+    .start()
+
+
+windowed_query.awaitTermination()
 
 query.awaitTermination()
