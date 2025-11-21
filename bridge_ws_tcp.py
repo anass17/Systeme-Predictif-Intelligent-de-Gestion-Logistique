@@ -38,9 +38,6 @@ async def websocket_to_tcp():
                 
                 # Envoyer sur le socket TCP
                 conn.sendall((message_tcp + "\n").encode())  # ajout d'un \n pour Spark
-                
-                # Affichage console pour debug
-                print(f"[Bridge] Transmis à TCP : {message_tcp}")
 
             except websockets.ConnectionClosed:
                 print("[WebSocket] Connexion fermée")
