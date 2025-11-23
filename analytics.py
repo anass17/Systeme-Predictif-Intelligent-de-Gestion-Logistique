@@ -43,6 +43,7 @@ def df_to_list(df):
 stats["count_by_category"] = df_to_list(df.groupBy("category_name").count())
 stats["prediction_distribution"] = df_to_list(df.groupBy("prediction").count())
 stats["avg_by_month"] = df_to_list(df.groupBy("shipping_month_name").avg("order_item_total"))
+stats["total_by_month"] = df_to_list(df.groupBy("shipping_month_name").count())
 stats["avg_by_shipping_mode"] = df_to_list(df.groupBy("shipping_mode").avg("order_item_total"))
 stats["count_by_customer_segment"] = df_to_list(df.groupBy("customer_segment").count())
 
