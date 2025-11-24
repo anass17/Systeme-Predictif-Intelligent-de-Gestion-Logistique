@@ -1,6 +1,6 @@
 import os
-os.environ["PYSPARK_PYTHON"] = r"C:\Users\anass\AppData\Local\Programs\Python\Python311\python.exe"
-os.environ["PYSPARK_DRIVER_PYTHON"] = r"C:\Users\anass\AppData\Local\Programs\Python\Python311\python.exe"
+# os.environ["PYSPARK_PYTHON"] = r"C:\Users\anass\AppData\Local\Programs\Python\Python311\python.exe"
+# os.environ["PYSPARK_DRIVER_PYTHON"] = r"C:\Users\anass\AppData\Local\Programs\Python\Python311\python.exe"
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import avg, count, col
@@ -24,7 +24,7 @@ spark = SparkSession.builder \
 # Load PostgreSQL
 df = spark.read \
     .format("jdbc") \
-    .option("url", "jdbc:postgresql://localhost:5432/logistiques_db") \
+    .option("url", "jdbc:postgresql://172.21.192.1:5432/logistiques_db") \
     .option("dbtable", "predictions_logistique") \
     .option("user", "postgres") \
     .option("password", "123456789") \
@@ -54,7 +54,7 @@ stats_df = spark.createDataFrame([stats])
 stats_df.write \
     .format("com.mongodb.spark.sql.DefaultSource") \
     .mode("append") \
-    .option("uri", "mongodb://127.0.0.1/logistique.stats") \
+    .option("uri", "mongodb://172.21.192.1:27017/logistique.stats") \
     .save()
 
 # Stop Spark

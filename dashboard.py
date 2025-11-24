@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 from pymongo import MongoClient
+from streamlit_autorefresh import st_autorefresh
+
+st_autorefresh(interval=30000, limit=None, key="datarefresh")
 
 # Connect Mongo
 client = MongoClient("mongodb://127.0.0.1")

@@ -1,3 +1,7 @@
+import os
+os.environ["PYSPARK_PYTHON"] = r"C:\Users\anass\AppData\Local\Programs\Python\Python311\python.exe"
+os.environ["PYSPARK_DRIVER_PYTHON"] = r"C:\Users\anass\AppData\Local\Programs\Python\Python311\python.exe"
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, window, current_timestamp, array_max
 from pyspark.sql.types import StructType, StructField, StringType, FloatType
@@ -10,7 +14,7 @@ spark = SparkSession.builder \
     .config("spark.sql.shuffle.partitions", "8") \
     .config("spark.driver.memory", "8g") \
     .config("spark.driver.maxResultSize", "1g") \
-    .config("spark.jars", r"C:\Drivers\postgresql-42.3.3.jar") \
+    .config("spark.jars.packages", "org.postgresql:postgresql:42.7.3") \
     .config("spark.sql.adaptive.enabled", "true") \
     .getOrCreate()
 
@@ -65,11 +69,11 @@ predictions_df = predictions_df.withColumn(
     array_max(vector_to_array(col("probability")))
 )
 
-windowed_query = windowed_df.writeStream \
-    .format("console") \
-    .outputMode("update") \
-    .option("truncate", False) \
-    .start()
+# windowed_query = windowed_df.writeStream \
+#     .format("console") \
+#     .outputMode("update") \
+#     .option("truncate", False) \
+#     .start()
 
 
 try:
@@ -97,5 +101,5 @@ except Exception as e:
 
 else:
     query.awaitTermination()
-    windowed_query.awaitTermination()
+    # windowed_query.awaitTermination()
 
