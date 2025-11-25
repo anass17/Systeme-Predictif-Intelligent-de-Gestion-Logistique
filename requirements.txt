@@ -1,0 +1,14 @@
+pyspark==3.5.1
+streamlit==1.51.0
+streamlit-autorefresh==1.0.1
+pandas==2.3.3
+numpy==2.3.5
+apache-airflow==2.10.2
+fastapi==0.122.0
+websockets==15.0.1
+uvicorn==0.38.0
+pymongo==4.15.4
+psycopg2-binary==2.9.7
+matplotlib==3.10.7
+scikit-learn==1.7.2
+seaborn==0.13.2
