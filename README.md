@@ -1,3 +1,5 @@
+Ce README est en français. Pour la version anglaise, voir [README_en.md](README_en.md).
+
 # Système Intelligente de Gestion Logistique
 
 Un système prédictif de bout en bout pour la gestion logistique utilisant **Apache Spark**, **Machine Learning**, **FastAPI**, **Airflow**, **PostgreSQL**, **MongoDB** et **Streamlit**.
@@ -14,11 +16,6 @@ Ce projet a pour objectif de **prédire et suivre les opérations logistiques en
 - **Orchestration** avec Apache Airflow
 - **Stockage des données** dans PostgreSQL et MongoDB
 - **Tableau de bord interactif** avec Streamlit, incluant l’actualisation automatique
-
----
-
-## **Architecture**
-
 
 ---
 
@@ -98,9 +95,9 @@ airflow scheduler
 airflow webserver
 ```
 
-### **9. Structure du projet**
+## **Structure du projet**
 
-```bash
+```
 ├─ data/                    
 ├─ models/                  # Modèles ML entraînés
 │  ├─ gbt_cv_pipeline       # Le Modèle GBT utiliser
@@ -137,3 +134,13 @@ airflow webserver
 - La connexion PostgreSQL nécessite `psycopg2-binary`.
 
 - L’actualisation automatique du tableau de bord utilise `streamlit-autorefresh`.
+
+---
+
+## Visualisations du projet
+
+### Interface Airflow
+![Airflow UI](https://github.com/user-attachments/assets/981a9138-8b79-4456-83f2-6e8b2fb81e8d)
+
+### Interface Streamlit
+![Streamlit UI](https://github.com/user-attachments/assets/5266fc01-b3ee-4dd2-b698-95f2a0cfa231)
